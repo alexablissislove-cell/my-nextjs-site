@@ -20,6 +20,23 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Vercel deployment and telemetry
+
+This Next.js app lives at the repository root. In Vercel, use the **Next.js**
+framework preset, leave **Root Directory** empty, and leave build, output,
+install, and development command overrides disabled.
+
+The root layout mounts Web Analytics and Speed Insights once for all routes.
+Enable those products on the Vercel project and deploy to serve their scripts
+and collection endpoints. Dashboard metrics require real visits; a successful
+build alone does not prove events have been received.
+
+Open a pull request to verify a Preview deployment before merging to `main`.
+Keep Preview environment variables separate from Production credentials.
+
+Run the available checks with `npm run lint`, `npx tsc --noEmit`, and
+`npm run build`.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
