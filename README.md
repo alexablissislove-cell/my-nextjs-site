@@ -37,6 +37,11 @@ Keep Preview environment variables separate from Production credentials.
 Run the available checks with `npm run lint`, `npx tsc --noEmit`, and
 `npm run build`.
 
+The scoped npm override for `@typescript-eslint/typescript-estree` selects
+`minimatch` 11.0.8 to address GHSA-g3hv-75wg-m249. It leaves legacy minimatch
+consumers unchanged. Remove the override once TypeScript ESLint declares a
+patched dependency; recheck lint and project-service glob matching when updating it.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
