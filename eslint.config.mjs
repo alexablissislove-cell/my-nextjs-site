@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Nested apps keep their own ESLint config, which does not apply here.
+    "my-app/.next/**",
   ]),
 ]);
 
