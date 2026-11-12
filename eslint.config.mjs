@@ -12,7 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    "public/ocr/**", // Generated third-party worker and WASM loaders.
+    // Nested apps keep their own ESLint config, which does not apply here.
+    "my-app/.next/**",
   ]),
 ]);
 
