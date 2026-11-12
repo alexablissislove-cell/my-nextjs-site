@@ -3,7 +3,12 @@
   "tasks": {
     "build": {
       "tags": ["ci"],
-      "outputs": [".next/**", "!.next/cache/**", "!.next/dev/**"]
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "!.next/dev/**",
+        "public/ocr/**"
+      ]
     },
     "lint": {
       "tags": ["ci"],
