@@ -1,24 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Text Studio
+
+A single Next.js app with integrated, in-browser image-to-text OCR.
+
+## Text Studio: integrated image-to-text OCR
+
+The root app is the OCR workspace; it is not a separate project or service.
+Select or drop a PNG, JPG, WebP, or BMP (up to 12 MB), then choose **Extract
+text**. English text can be edited, copied, or downloaded as a `.txt` file.
+**Use sample** loads a bundled test image; it still runs real OCR.
+PDF input and additional languages are not implemented.
+
+Recognition uses Tesseract.js in a browser Web Worker. Images and extracted
+text are not sent to an OCR server or saved by the app. Existing Vercel
+Analytics and Speed Insights remain enabled for page/performance telemetry.
+No OCR API keys, environment variables, or standalone `tesseract-ocr` project
+are needed. The separate project's Windows executables are not used.
+
+`npm ci` installs the locked engine and English language package. `npm run
+dev` and `npm run build` prepare the worker, all supported WASM variants,
+and language data under generated `public/ocr/`, served by this same app.
+There are no CDN dependencies at recognition time. Turborepo caches these
+assets with the build. Do not commit generated `public/ocr/` files.
 
 ## Getting Started
 
-First, run the development server:
-
-```bash
+```sh
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open http://localhost:3000. For a production check, run `npm run check`, then
+`npm start`. To smoke-test the full OCR flow, choose **Use sample**, choose
+**Extract text**, and verify the result includes “A little less typing.” and
+“Everything runs in your browser.” Edit a line, then test **Copy text** and
+**Download .txt**. Also check a personal image and an unsupported file;
+unsupported inputs should show a useful error without starting OCR.
 
 ## Vercel deployment and telemetry
 
