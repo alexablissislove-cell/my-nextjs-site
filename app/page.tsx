@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { Worker } from "tesseract.js";
+import { initializeOcrWorker } from "./ocr-worker";
 
 const supportedTypes = ["image/png", "image/jpeg", "image/webp", "image/bmp"];
 const maxBytes = 12 * 1024 * 1024;
@@ -82,13 +83,11 @@ export default function Home() {
     setStatus("Loading OCR engine…");
     let worker: Worker | undefined;
     try {
-      const { createWorker } = await import("tesseract.js");
-      worker = await createWorker("eng", 1, {
+      worker = await initializeOcrWorker({
         workerPath: `${window.location.origin}/ocr/worker.min.js`,
         corePath: `${window.location.origin}/ocr`,
         langPath: `${window.location.origin}/ocr`,
         workerBlobURL: false,
-        errorHandler: () => {}, // Rejected recognition jobs are handled by the catch below.
         logger: (message) => {
           if (!active.current) return;
           if (message.status === "recognizing text") {
